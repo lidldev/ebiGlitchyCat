@@ -9,20 +9,42 @@ type camera struct {
 	drawable *ebiten.Image // the image that the camera will draw
 }
 
+const (
+	outsideWidth  = 800
+	outsideHeight = 600
+)
+
 func newCamera() *camera {
 	c := &camera{}
 
 	return c
 }
 
-func (c *camera) init() {
+func (c *camera) setPos(x, y int) {
+	c.x += x
+	c.y += y
+}
 
+func (c *camera) init() {
+	c.drawable = ebiten.NewImage(outsideWidth, outsideHeight)
+}
+
+func (camera *camera) render(screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+
+	screen.DrawImage(camera.drawable, op)
 }
 
 func (c *camera) update() {
-
+	if ebiten.IsKeyPressed(ebiten.KeyA) {
+		c.setPos(-2, 0)
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyD) {
+		c.setPos(2, 0)
+	}
 }
+func (c *camera) draw(image *ebiten.Image, op *ebiten.DrawImageOptions) {
+	op.GeoM.Translate(float64(-c.x), float64(-c.y))
 
-func (c *camera) draw() {
-
+	c.drawable.DrawImage(image, op)
 }
