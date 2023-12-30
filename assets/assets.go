@@ -3,6 +3,7 @@ package assets
 import (
 	"embed"
 	"image"
+	_ "image/png"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
