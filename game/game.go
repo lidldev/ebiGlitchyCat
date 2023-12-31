@@ -1,13 +1,16 @@
 package game
 
 import (
-	"image/color"
-
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+const (
+	screenWidth  = 1000
+	screenHeight = 600
+)
+
 type Game struct {
-	player *player
+	player Player
 }
 
 func NewGame() *Game {
@@ -16,15 +19,15 @@ func NewGame() *Game {
 	return g
 }
 
+func (g *Game) Draw(screen *ebiten.Image) {
+	g.player.Draw(screen)
+}
+
 func (g *Game) Update() error {
+	g.player.Update()
 	return nil
 }
 
-func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{0x80, 0xa0, 0xc0, 0xff})
-	//screen.DrawImage(assets.MainSprite, &ebiten.DrawImageOptions{})
-}
-
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
-	return outsideWidth, outsideHeight
+	return screenWidth, screenHeight
 }
