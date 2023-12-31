@@ -1,29 +1,32 @@
 package game
 
-import (
-	"main/assets"
+import "github.com/hajimehoshi/ebiten/v2"
 
-	"github.com/hajimehoshi/ebiten/v2"
-)
-
-type Player struct {
-	x int
-	y int
-
-	camera *camera
+type char struct {
+	x  int
+	y  int
+	vx int
+	vy int
 }
 
-func NewPlayer() *Player {
-	p := &Player{}
+func (c *char) update() {
+
+}
+
+type player struct {
+	player *char
+}
+
+func NewPlayer() *player {
+	p := &player{}
 
 	return p
 }
 
-func (p *Player) Update() error {
+func (p *player) Update() error {
 	return nil
 }
 
-func (p *Player) Draw(screen *ebiten.Image) {
-	p.camera.draw(assets.MainSprite, &ebiten.DrawImageOptions{})
-	p.camera.render(screen)
+func (p *player) Draw(screen *ebiten.Image) {
+
 }
