@@ -1,6 +1,8 @@
 package game
 
 import (
+	"image/color"
+
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -11,6 +13,7 @@ const (
 
 type Game struct {
 	player Player
+	camera camera
 }
 
 func NewGame() *Game {
@@ -20,7 +23,8 @@ func NewGame() *Game {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	g.player.Draw(screen)
+	screen.Fill(color.RGBA{0x80, 0xa0, 0xc0, 0xff})
+	g.camera.draw(g.player.Draw(screen))
 }
 
 func (g *Game) Update() error {
