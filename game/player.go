@@ -13,7 +13,8 @@ type char struct {
 	vx int
 	vy int
 
-	s *ebiten.Image
+	s      *ebiten.Image
+	camera camera
 }
 
 const (
@@ -50,7 +51,7 @@ func (c *char) draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(1.2, 1.2)
 	op.GeoM.Translate(float64(c.x)/unit, float64(c.y)/unit)
-	screen.DrawImage(c.s, op)
+	c.camera.draw(c.s, op)
 }
 
 type Player struct {
@@ -62,9 +63,9 @@ func (p *Player) Update() error {
 		p.player = &char{x: 50 * unit, y: groundY * unit}
 	}
 
-	if ebiten.IsKeyPressed(ebiten.KeyA) {
+	if ebiten.IsKeyPressed(ebiten.KeyRight) {
 		p.player.vx = -5 * unit
-	} else if ebiten.IsKeyPressed(ebiten.KeyD) {
+	} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
 		p.player.vx = 5 * unit
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {

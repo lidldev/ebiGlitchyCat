@@ -14,12 +14,6 @@ const (
 	outsideHeight = 600
 )
 
-func newCamera() *camera {
-	c := &camera{}
-
-	return c
-}
-
 func (c *camera) setPos(x, y int) {
 	c.x += x
 	c.y += y
@@ -33,15 +27,6 @@ func (camera *camera) render(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 
 	screen.DrawImage(camera.drawable, op)
-}
-
-func (c *camera) update() {
-	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		c.setPos(-1, 0)
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyD) {
-		c.setPos(1, 0)
-	}
 }
 
 func (c *camera) draw(image *ebiten.Image, op *ebiten.DrawImageOptions) {
