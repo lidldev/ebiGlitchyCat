@@ -50,7 +50,7 @@ func (c *char) draw(screen *ebiten.Image) {
 
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(1.2, 1.2)
-	op.GeoM.Translate(float64(c.x)/unit, float64(c.y)/unit)
+	op.GeoM.Translate(float64(c.camera.x)/unit, float64(c.camera.y)/unit)
 	c.camera.draw(c.s, op)
 }
 
