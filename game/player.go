@@ -56,6 +56,7 @@ func (c *char) draw(screen *ebiten.Image) {
 
 type Player struct {
 	player *char
+	camera camera
 }
 
 func (p *Player) Update() error {
@@ -64,8 +65,10 @@ func (p *Player) Update() error {
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyRight) {
+		p.camera.x += 10
 		p.player.vx = -5 * unit
 	} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+		p.camera.y -= 10
 		p.player.vx = 5 * unit
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {

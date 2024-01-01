@@ -34,3 +34,7 @@ func (c *camera) draw(image *ebiten.Image, op *ebiten.DrawImageOptions) {
 
 	c.drawable.DrawImage(image, op)
 }
+
+func (c *camera) clear() {
+	c.drawable.Clear()
+}
