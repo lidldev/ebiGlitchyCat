@@ -1,7 +1,6 @@
 package game
 
 import (
-	"image/color"
 	"main/assets"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -13,8 +12,9 @@ const (
 )
 
 type Game struct {
-	player Player
-	camera camera
+	player     Player
+	camera     camera
+	background Background
 }
 
 func NewGame() *Game {
@@ -26,7 +26,9 @@ func NewGame() *Game {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	g.camera.clear()
-	screen.Fill(color.RGBA{0x80, 0xa0, 0xc0, 0xff})
+
+	g.background.intialBackground(screen)
+
 	g.camera.draw(assets.MainSprite, &ebiten.DrawImageOptions{})
 	g.camera.render(screen)
 }
