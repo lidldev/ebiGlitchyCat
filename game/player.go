@@ -4,7 +4,6 @@ import (
 	"main/assets"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
 
 type char struct {
@@ -18,32 +17,32 @@ type char struct {
 }
 
 const (
-	groundY = 360
-	unit    = 16
+	groundY = 100
+	unit    = 10
 )
 
-func (c *char) tryJump() {
-	if c.y == groundY*unit {
-		c.vy = -10 * unit
-	}
-}
+// func (c *char) tryJump() {
+// 	if c.y == groundY*unit {
+// 		c.vy = -10 * unit
+// 	}
+// }
 
-func (c *char) update() {
-	c.x += c.vx
-	c.y += c.vy
+// func (c *char) update() {
+// 	c.x += c.vx
+// 	c.y += c.vy
 
-	if c.y > groundY*unit {
-		c.y = groundY * unit
-	}
-	if c.vx > 0 {
-		c.vx -= 2
-	} else if c.vx < 0 {
-		c.vx += 2
-	}
-	if c.vy < 20*unit {
-		c.vy += 8
-	}
-}
+// 	if c.y > groundY*unit {
+// 		c.y = groundY * unit
+// 	}
+// 	if c.vx > 0 {
+// 		c.vx -= 2
+// 	} else if c.vx < 0 {
+// 		c.vx += 2
+// 	}
+// 	if c.vy < 20*unit {
+// 		c.vy += 8
+// 	}
+// }
 
 func (c *char) draw(screen *ebiten.Image) {
 	c.s = assets.MainSprite
@@ -64,17 +63,17 @@ func (p *Player) Update() error {
 		p.player = &char{x: 50 * unit, y: groundY * unit}
 	}
 
-	if ebiten.IsKeyPressed(ebiten.KeyRight) {
-		p.camera.x += 10
-		p.player.vx = -5 * unit
-	} else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
-		p.camera.y -= 10
-		p.player.vx = 5 * unit
-	}
-	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
-		p.player.tryJump()
-	}
-	p.player.update()
+	// if ebiten.IsKeyPressed(ebiten.KeyRight) {
+	// 	p.camera.x += 10
+	// 	p.player.vx = -5 * unit
+	// } else if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+	// 	p.camera.y -= 10
+	// 	p.player.vx = 5 * unit
+	// }
+	// if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
+	// 	p.player.tryJump()
+	// }
+	// p.player.update()
 	return nil
 }
 

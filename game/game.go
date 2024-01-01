@@ -30,10 +30,11 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 func (g *Game) Update() error {
 	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		g.camera.x += 10
+		g.camera.vx += 10
 	} else if ebiten.IsKeyPressed(ebiten.KeyD) {
-		g.camera.x -= 10
+		g.camera.vx -= 10
 	}
+	g.camera.movement()
 	g.player.Update()
 	return nil
 }
