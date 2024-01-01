@@ -6,11 +6,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-const (
-	screenWidth  = 1000
-	screenHeight = 600
-)
-
 type Game struct {
 	player     Player
 	camera     camera
@@ -44,5 +39,5 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
-	return screenWidth, screenHeight
+	return outsideWidth, outsideHeight
 }
