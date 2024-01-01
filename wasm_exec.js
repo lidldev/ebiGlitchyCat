@@ -1,7 +1,3 @@
-// Copyright 2018 The Go Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 "use strict";
 
 (() => {
@@ -214,12 +210,6 @@
 					add: (a, b) => a + b,
 				},
 				gojs: {
-					// Go's SP does not change as long as no Go code is running. Some operations (e.g. calls, getters and setters)
-					// may synchronously trigger a Go event handler. This makes Go code get executed in the middle of the imported
-					// function. A goroutine can switch to a new stack if the current stack is too small (see morestack function).
-					// This changes the SP, thus we have to update the SP used by the imported function.
-
-					// func wasmExit(code int32)
 					"runtime.wasmExit": (sp) => {
 						sp >>>= 0;
 						const code = this.mem.getInt32(sp + 8, true);
@@ -232,7 +222,6 @@
 						this.exit(code);
 					},
 
-					// func wasmWrite(fd uintptr, p unsafe.Pointer, n int32)
 					"runtime.wasmWrite": (sp) => {
 						sp >>>= 0;
 						const fd = getInt64(sp + 8);
@@ -270,8 +259,6 @@
 							() => {
 								this._resume();
 								while (this._scheduledTimeouts.has(id)) {
-									// for some reason Go failed to register the timeout event, log and try again
-									// (temporary workaround for https://github.com/golang/go/issues/28975)
 									console.warn("scheduleTimeoutEvent: missed timeout event");
 									this._resume();
 								}
@@ -364,7 +351,6 @@
 						}
 					},
 
-					// func valueInvoke(v ref, args []ref) (ref, bool)
 					"syscall/js.valueInvoke": (sp) => {
 						sp >>>= 0;
 						try {
@@ -381,7 +367,6 @@
 						}
 					},
 
-					// func valueNew(v ref, args []ref) (ref, bool)
 					"syscall/js.valueNew": (sp) => {
 						sp >>>= 0;
 						try {
@@ -425,7 +410,6 @@
 						this.mem.setUint8(sp + 24, (loadValue(sp + 8) instanceof loadValue(sp + 16)) ? 1 : 0);
 					},
 
-					// func copyBytesToGo(dst []byte, src ref) (int, bool)
 					"syscall/js.copyBytesToGo": (sp) => {
 						sp >>>= 0;
 						const dst = loadSlice(sp + 8);
@@ -440,7 +424,6 @@
 						this.mem.setUint8(sp + 48, 1);
 					},
 
-					// func copyBytesToJS(dst ref, src []byte) (int, bool)
 					"syscall/js.copyBytesToJS": (sp) => {
 						sp >>>= 0;
 						const dst = loadValue(sp + 8);
@@ -468,7 +451,7 @@
 			}
 			this._inst = instance;
 			this.mem = new DataView(this._inst.exports.mem.buffer);
-			this._values = [ // JS values that Go currently has references to, indexed by reference id
+			this._values = [ 
 				NaN,
 				0,
 				null,
@@ -486,10 +469,9 @@
 				[globalThis, 5],
 				[this, 6],
 			]);
-			this._idPool = [];   // unused ids that have been garbage collected
-			this.exited = false; // whether the Go program has exited
+			this._idPool = [];
+			this.exited = false; 
 
-			// Pass command line arguments and environment variables to WebAssembly by writing them to the linear memory.
 			let offset = 4096;
 
 			const strPtr = (str) => {
@@ -524,8 +506,6 @@
 				offset += 8;
 			});
 
-			// The linker guarantees global data starts from at least wasmMinDataAddr.
-			// Keep in sync with cmd/link/internal/ld/data.go:wasmMinDataAddr.
 			const wasmMinDataAddr = 4096 + 8192;
 			if (offset >= wasmMinDataAddr) {
 				throw new Error("total length of command line and environment variables exceeds limit");
