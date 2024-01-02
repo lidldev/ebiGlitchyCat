@@ -1,8 +1,6 @@
 package game
 
 import (
-	"main/assets"
-
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -23,17 +21,10 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	g.camera.clear()
 
 	g.background.intialBackground(screen)
-
-	g.camera.draw(assets.MainSprite, &ebiten.DrawImageOptions{})
 	g.camera.render(screen)
 }
 
 func (g *Game) Update() error {
-	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		g.camera.vx += 10
-	} else if ebiten.IsKeyPressed(ebiten.KeyD) {
-		g.camera.vx -= 10
-	}
 	g.camera.movement()
 	g.player.Update()
 	return nil
