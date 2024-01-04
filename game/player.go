@@ -66,10 +66,8 @@ func (p *Player) Update() error {
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyD) {
-		p.camera.vx += 10
-		p.player.vx = -5 * unit
+		p.player.vx = -5 * unit // p.camera.vx changing has been cut
 	} else if ebiten.IsKeyPressed(ebiten.KeyA) {
-		p.camera.vx -= 10
 		p.player.vx = 5 * unit
 	}
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
@@ -77,6 +75,8 @@ func (p *Player) Update() error {
 	}
 	p.player.update()
 	p.camera.movement()
+	p.camera.x = p.player.x // This is added to make the camera focus on the player's position
+	p.camera.y = p.player.y
 	return nil
 }
 

@@ -26,6 +26,15 @@ func (c *camera) movement() {
 	}
 }
 
+func (c *camera) update() {
+	if ebiten.IsKeyPressed(ebiten.KeyA) {
+		c.x -= 10
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyD) {
+		c.x += 10
+	}
+}
+
 func (c *camera) setPos(x, y int) {
 	c.x += x
 	c.y += y
