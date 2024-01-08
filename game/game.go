@@ -18,14 +18,14 @@ func NewGame() *Game {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	g.camera.clear()
-
 	g.background.intialBackground(screen)
+	g.camera.clear()
+	g.player.Draw(screen)
+
 	g.camera.render(screen)
 }
 
 func (g *Game) Update() error {
-	g.camera.movement()
 	g.player.Update()
 	return nil
 }
