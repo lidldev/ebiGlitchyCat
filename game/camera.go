@@ -3,10 +3,10 @@ package game
 import "github.com/hajimehoshi/ebiten/v2"
 
 type camera struct {
-	x  int // x position of the camera
-	y  int // y position of the camera
-	vx int
-	vy int
+	x int // x position of the camera
+	y int // y position of the camera
+	// vx int
+	// vy int
 
 	drawable *ebiten.Image // the image that the camera will draw
 }
@@ -16,24 +16,24 @@ const (
 	outsideHeight = 600
 )
 
-func (c *camera) movement() {
-	c.x += c.vx
+// func (c *camera) movement() {
+// 	c.x += c.vx
 
-	if c.vx > 0 {
-		c.vx -= 10
-	} else if c.vx < 0 {
-		c.vx += 10
-	}
-}
+// 	if c.vx > 0 {
+// 		c.vx -= 10
+// 	} else if c.vx < 0 {
+// 		c.vx += 10
+// 	}
+// }
 
-func (c *camera) update() {
-	if ebiten.IsKeyPressed(ebiten.KeyA) {
-		c.x -= 10
-	}
-	if ebiten.IsKeyPressed(ebiten.KeyD) {
-		c.x += 10
-	}
-}
+// func (c *camera) update() {
+// 	if ebiten.IsKeyPressed(ebiten.KeyA) {
+// 		c.vx -= 10
+// 	}
+// 	if ebiten.IsKeyPressed(ebiten.KeyD) {
+// 		c.vx += 10
+// 	}
+// }
 
 func (c *camera) setPos(x, y int) {
 	c.x += x

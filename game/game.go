@@ -1,6 +1,8 @@
 package game
 
 import (
+	"main/assets"
+
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -13,14 +15,18 @@ type Game struct {
 func NewGame() *Game {
 	g := &Game{}
 	g.camera.init()
-	g.camera.setPos(-450, -300)
+	g.camera.setPos(0, 0)
 	return g
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	g.background.intialBackground(screen)
 	g.camera.clear()
-	g.player.Draw(screen)
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Scale(0.8, 0.8)
+	op.GeoM.Translate(float64(g.player.player.x)/unit, float64(g.player.player.y)/unit)
+	g.camera.draw(assets.MainSprite, op)
+	//g.player.Draw(screen)
 
 	g.camera.render(screen)
 }

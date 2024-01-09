@@ -51,7 +51,7 @@ func (c *Char) draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(0.8, 0.8)
 	op.GeoM.Translate(float64(c.x)/unit, float64(c.y)/unit)
-	c.camera.draw(c.s, op)
+	//c.camera.draw(assets.MainSprite, op)
 }
 
 type Player struct {
@@ -72,12 +72,17 @@ func (p *Player) Update() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		p.player.tryJump()
 	}
-	p.camera.x += p.player.x
-	p.camera.y += p.player.y
+	p.camera.x = p.player.x
+	p.camera.y = p.player.y
 	p.player.update()
 	return nil
 }
 
 func (p *Player) Draw(screen *ebiten.Image) {
-	p.player.draw(screen)
+	// p.camera.clear()
+	// op := &ebiten.DrawImageOptions{}
+	// op.GeoM.Scale(0.8, 0.8)
+	// op.GeoM.Translate(float64(p.player.x)/unit, float64(p.player.y)/unit)
+	// p.camera.draw(assets.MainSprite, op)
+	// p.camera.render(screen)
 }
