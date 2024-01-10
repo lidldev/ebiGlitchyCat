@@ -15,7 +15,7 @@ type Game struct {
 func NewGame() *Game {
 	g := &Game{}
 	g.camera.init()
-	g.camera.setPos(0, 0)
+	g.camera.setPos(g.camera.x, g.camera.y)
 	return g
 }
 
