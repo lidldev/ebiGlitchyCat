@@ -36,8 +36,8 @@ const (
 // }
 
 func (c *camera) setPos(x, y int) {
-	c.x += x
-	c.y += y
+	c.x = x
+	c.y = y
 }
 
 func (c *camera) init() {

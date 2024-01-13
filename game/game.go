@@ -15,7 +15,6 @@ type Game struct {
 func NewGame() *Game {
 	g := &Game{}
 	g.camera.init()
-	g.camera.setPos(g.camera.x, g.camera.y)
 	return g
 }
 
@@ -33,6 +32,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 
 func (g *Game) Update() error {
 	g.player.Update()
+	g.camera.setPos(g.player.player.x/unit, g.player.player.y/unit)
 	return nil
 }
 
