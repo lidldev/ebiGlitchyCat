@@ -1,8 +1,6 @@
 package game
 
 import (
-	"main/assets"
-
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 )
@@ -45,18 +43,8 @@ func (c *Char) update() {
 	}
 }
 
-func (c *Char) draw(screen *ebiten.Image) {
-	c.s = assets.MainSprite
-
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Scale(0.8, 0.8)
-	op.GeoM.Translate(float64(c.x)/unit, float64(c.y)/unit)
-	//c.camera.draw(assets.MainSprite, op)
-}
-
 type Player struct {
 	player *Char
-	camera camera
 }
 
 func (p *Player) Update() error {
@@ -74,13 +62,4 @@ func (p *Player) Update() error {
 	}
 	p.player.update()
 	return nil
-}
-
-func (p *Player) Draw(screen *ebiten.Image) {
-	// p.camera.clear()
-	// op := &ebiten.DrawImageOptions{}
-	// op.GeoM.Scale(0.8, 0.8)
-	// op.GeoM.Translate(float64(p.player.x)/unit, float64(p.player.y)/unit)
-	// p.camera.draw(assets.MainSprite, op)
-	// p.camera.render(screen)
 }

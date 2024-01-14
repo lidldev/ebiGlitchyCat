@@ -20,6 +20,7 @@ func NewGame() *Game {
 
 func (g *Game) Draw(screen *ebiten.Image) {
 	g.camera.clear()
+	g.camera.draw(assets.Background, &ebiten.DrawImageOptions{})
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(0.8, 0.8)
 	op.GeoM.Translate(float64(g.player.player.x)/unit, float64(g.player.player.y)/unit)
