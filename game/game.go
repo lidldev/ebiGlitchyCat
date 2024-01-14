@@ -19,7 +19,6 @@ func NewGame() *Game {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.DrawImage(assets.Background, &ebiten.DrawImageOptions{})
 	g.camera.clear()
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(0.8, 0.8)

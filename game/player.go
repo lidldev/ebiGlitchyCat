@@ -72,8 +72,6 @@ func (p *Player) Update() error {
 	if inpututil.IsKeyJustPressed(ebiten.KeySpace) {
 		p.player.tryJump()
 	}
-	p.camera.x = p.player.x
-	p.camera.y = p.player.y
 	p.player.update()
 	return nil
 }
