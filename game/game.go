@@ -19,20 +19,20 @@ func NewGame() *Game {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	g.background.intialBackground(screen)
+	screen.DrawImage(assets.Background, &ebiten.DrawImageOptions{})
 	g.camera.clear()
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Scale(0.8, 0.8)
 	op.GeoM.Translate(float64(g.player.player.x)/unit, float64(g.player.player.y)/unit)
 	g.camera.draw(assets.MainSprite, op)
+	screen.DrawImage(assets.MainSprite, &ebiten.DrawImageOptions{})
 	//g.player.Draw(screen)
-
 	g.camera.render(screen)
 }
 
 func (g *Game) Update() error {
 	g.player.Update()
-	g.camera.setPos(g.player.player.x/unit, g.player.player.y/unit)
+	g.camera.setPos(g.player.player.x/unit-300, g.player.player.y/unit-400)
 	return nil
 }
 

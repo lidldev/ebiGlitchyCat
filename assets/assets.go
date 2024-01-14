@@ -13,6 +13,7 @@ import (
 var assets embed.FS
 
 var MainSprite = getSingleImage("main.png")
+var Background = getSingleImage("Sprite-0001.png")
 
 func getSingleImage(name string) *ebiten.Image {
 	f, err := assets.Open(name)
